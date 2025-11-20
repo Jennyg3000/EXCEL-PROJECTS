@@ -1,126 +1,97 @@
-# 🚴 Global Bike Sales Performance Analysis (Excel)
+# 📊 Bike Sales Performance Analysis: The Pivot Lab
 
-> An in-depth analysis of global bike sales data, leveraging **Microsoft Excel's advanced functions and PivotTables** to uncover trends in revenue, profit, and customer demographics across different product categories and countries.
+> A project demonstrating the power of **Microsoft Excel PivotTables** for complex data aggregation, segmentation, and multi-dimensional profit analysis using global bike sales data.
 
 ---
 
 ## 💡 Overview
 
-This project provides a comprehensive, formula-driven analysis of the provided bike sales data. The core objective is to utilize Excel's powerful features to perform data transformation, calculate profitability metrics, and generate clear, actionable reports for business stakeholders across key areas: time-series growth, customer segmentation, and geographic performance.
+This project uses a large transactional dataset of bike sales (`Bike Sales.csv`) to create sophisticated summary reports through PivotTables. The core goal is to generate actionable insights into profitability and sales volume across key dimensions: customer demographics (Age/Gender) and geographic location (Country/County).
+
+The Excel workbook is structured around the following key outputs:
+1.  **Raw Data Sheet:** The primary source for all pivots and calculations.
+2.  **Profit Segmentation Pivot:** Detailed analysis of profit contribution by customer segment and country.
+3.  **Sales Volume by County:** Analysis of product sales volume by specific local area.
 
 ---
 
-## ⚙️ Core Excel Functions Explained
+## ⚙️ Core Excel Functions & Features Explained
 
-The analysis and creation of the summary sheets were heavily reliant on the following Excel functions for data manipulation and aggregation:
+Since this is a "Pivot Lab," the analysis relies heavily on Excel's built-in data summarization tools.
 
-### 1. `SUMIFS` / `AVERAGEIFS` for Conditional Aggregation
-These functions are essential for calculating totals or averages based on specific criteria.
+### 1. PivotTables & PivotCharts (Core Tool)
+* **Explanation:** The fundamental feature used to automatically group, summarize, and aggregate data (e.g., summing `Profit` or counting `Order_Quantity`) without using formula rows.
+* **Usage:** Used universally across all summary sheets to transform raw transaction data into the final tables.
 
-* **Explanation:** Sums or averages values in a range that meet **multiple criteria** specified in separate ranges. This is the non-PivotTable method for summarizing data by dimension (e.g., country, product).
-* **Example Usage:** Used to calculate **Total Revenue** for a specific product in a given year.
-    * `=SUMIFS(Revenue_Column, Year_Column, 2021, Category_Column, "Bikes")`
+### 2. Calculated Fields & Items (Within PivotTable)
+* **Explanation:** Formulas created *inside* the PivotTable to perform calculations on aggregated data (e.g., calculating **Profit Margin** as a percentage).
+* **Usage:** Could be used to calculate a Profit Rate column within the Segmentation Pivot.
 
-### 2. `IFS` for Logic and Classification
-This function allows for clean, multi-condition logic, crucial for segmenting customers.
+### 3. `IF` or `IFS` (Data Preparation)
+* **Explanation:** Used on the **Raw Data Sheet** to create categorical grouping columns necessary for the pivots.
+* **Example Usage:** Used to create the **Age\_Group** column from the raw `Customer_Age` data (`Youth`, `Young Adults`, `Adults`).
 
-* **Explanation:** Checks **multiple logical tests** in sequence and returns the value corresponding to the **first test that is TRUE**. It is superior to nested `IF` statements.
-* **Example Usage:** Used to categorize customers into age groups (`Youth`, `Adults`, `Seniors`) from the raw `Customer_Age` column.
-
-### 3. `TEXT` and `CONCATENATE` for Data Preparation
-These functions ensure that data is properly formatted for consistent reporting.
-
-* **`TEXT`:** Converts a numeric value (like a date) to a text string in a specified number format.
-    * **Example Usage:** Used to extract a consistent `YYYY` format from the date column for annual analysis.
-* **`CONCATENATE` / `&` Operator:** Joins two or more text strings.
-    * **Example Usage:** Used to combine `Product Category` and `Sub-Category` into a single reporting label.
+### 4. `SUMIFS` / `GETPIVOTDATA` (Reporting & Dashboard)
+* **`SUMIFS`:** Could be used on a separate dashboard sheet to pull specific totals from the raw data based on complex criteria.
+* **`GETPIVOTDATA`:** Used to reliably retrieve data from the PivotTable for use in other parts of a dashboard sheet.
 
 ---
 
 ## 📊 Detailed Sheet Analysis
 
-### Sheet 1: Sales Data (Raw Transactional Data)
+### Sheet 1: Profit Segmentation Pivot
 
-This sheet contains the full, raw, transaction-level data used as the source for all analysis.
+This PivotTable provides a multi-dimensional analysis of profit, allowing managers to view the profitability of each **Age Group** segmented by **Customer Gender** across different **Countries**.
 
-* **Content:** Includes columns for `Date`, `Customer_Age`, `Age_Group` (a calculated column), `Country`, `State`, `Product_Category`, `Revenue`, and `Profit`.
-* **Key Role:** This sheet is where the **`IFS`** and **`TEXT`** functions are first applied to clean and transform the data before aggregation.
+* **Data Aggregated:** Sum of Profit.
+* **Key Filters:** Country, Age\_Group, Customer\_Gender.
+* **Table Snapshot (Abridged):**
 
----
+| Age\_Group | Customer\_Gender | Australia | France | United States | Grand Total |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Youth (<25) | F | 0.0138 | 0.0384 | 0 | 0.0587 |
+| | M | 0.0029 | 0.0257 | 0 | 0.0394 |
+| **Youth Total** | | **0.0168** | **0.0642** | **0** | **0.0981** |
+| Young Adults (25-34) | F | 0.0991 | 0.0463 | 0.0921 | 0.2980 |
 
-### Sheet 2: Revenue and Profit by Year (Time Series Analysis)
+* **Visualization:** **Profit Contribution by Segment** 
 
-This sheet aggregates the raw transaction data to show overall annual performance trends.
-
-* **Key Function Used:** **`SUMIFS`** (Used to total Profit and Revenue columns, with `Year` as the criteria).
-* **Table Snapshot (Summarized Data):**
-
-| Year | Annual Profit | Annual Revenue |
-| :---: | :---: | :---: |
-| 2017 | \$4,065,680 | \$10,289,670 |
-| 2019 | \$7,417,353 | \$15,705,990 |
-| 2021 | \$12,986,202 | \$29,747,226 |
-
-* **Visualization:** **Revenue and Profit Trend** 
-
-[Image of a Line Chart showing revenue and profit trend over several years]
-<img width="793" height="482" alt="image" src="https://github.com/user-attachments/assets/9ce8254c-d63d-496d-b68d-228fb6aa8bc7" />
+<img width="1029" height="516" alt="image" src="https://github.com/user-attachments/assets/6efbcd7d-f7bc-4eed-8254-e76bf539778c" />
 
 
-    * *Insight:* The chart helps visualize the year-over-year growth and identify periods of stagnation (e.g., the dip in 2019).
+    * *Insight:* The chart quickly shows which specific gender/age group combination (e.g., Young Adults - Female in Australia) contributes the largest percentage of total profit.
 
 ---
 
-### Sheet 3: Revenue by Age Group (Customer Segmentation)
+### Sheet 2: Sales Volume by County
 
-This sheet is crucial for customer segmentation, identifying which demographic drives the most revenue using `IFS` logic to categorize customers.
+This sheet uses a simple PivotTable (or structured summary) to track the quantity of products sold across different local geographic areas (`County`).
 
-* **Key Function Used:** **`IFS`** (Used to create the **Age\_Group** classification) and **PivotTable Aggregation**.
-* **Table Snapshot (Summarized Data):**
+* **Data Aggregated:** Sum of Sales Volume.
+* **Key Filters:** County, Product.
+* **Table Snapshot (Summarized Pivot):**
 
-| Age Group | Sum of Revenue |
-| :---: | :---: |
-| Adults (35-64) | \$47,323,876 |
-| Young Adults (25-34) | \$34,310,905 |
-| Youth (<25) | \$13,201,837 |
-| Seniors (64+) | \$339,700 |
-
-* **Visualization:** **Revenue by Age Group Chart** 
-
-<img width="791" height="476" alt="image" src="https://github.com/user-attachments/assets/44bd758f-6ad2-4e6a-8b40-4334882a4226" />
-
-
-    * *Insight:* The bar chart confirms that the **Adults (35-64)** segment is the most valuable and should be prioritized.
-
----
-
-### Sheet 4: Product Revenue by Country (Geographic and Product Analysis)
-
-This sheet uses a two-dimensional PivotTable structure to analyze both geographic performance and product category success simultaneously.
-
-* **Key Function Used:** Driven primarily by **PivotTable Row and Column fields** using the raw data.
-* **Table Snapshot (Top Countries):**
-
-| Country | Accessories Revenue | Bikes Revenue | Clothing Revenue | Total Revenue |
+| County | Laptops | Printers | Smartphones | Grand Total |
 | :---: | :---: | :---: | :---: | :---: |
-| United States | \$5.8M | \$21.5M | \$3.4M | \$30.8M |
-| Australia | \$3.3M | \$20.2M | \$1.9M | \$25.4M |
-| United Kingdom | \$1.9M | \$8.1M | \$0.9M | \$11.1M |
-| Germany | \$1.7M | \$7.5M | \$0.7M | \$9.9M |
+| Cornwall | 700 | 400 | 0 | 1100 |
+| Durham | 250 | 300 | 0 | 550 |
+| Essex | 0 | 800 | 300 | 1100 |
+| Lancashire | 600 | 0 | 150 | 750 |
+| Yorkshire | 500 | 0 | 200 | 700 |
+| **Grand Total** | **2450** | **1500** | **1250** | **5200** |
 
-* **Visualization:** **Stacked Column Chart (Revenue by Country & Product Category)** 
+* **Visualization:** **Product Volume Distribution** 
 
-<img width="863" height="518" alt="image" src="https://github.com/user-attachments/assets/3fada5b0-d992-47a2-a4bd-f1ea4ce5e97d" />
+[Image of a Bar Chart]
 
-
-    * *Insight:* The visual confirms the **United States** as the largest market and that **Bikes** constitute the overwhelming majority of revenue in all regions.
+    * *Insight:* A stacked bar chart visualization helps compare total sales across counties and visually assess the product mix sold in each region (e.g., Laptops dominate volume).
 
 ---
 
 ## 📂 Project Structure
 
-* `Bike_Sales_Final_Analysis.xlsx`: The final workbook containing all calculated columns, formulas, PivotTables, and charts.
-* `Bike_Sales_Visualizations_Lab.xlsx - Sales Data.csv`: Original raw transaction data.
+* `Bike_Sales_Pivot_Lab.xlsx`: The final workbook containing the raw data, PivotTables, and associated PivotCharts.
+* `Bike_Sales_Pivot_Lab.xlsx - Bike Sales.csv`: Original raw transactional data file.
 
 ---
 
@@ -128,7 +99,7 @@ This sheet uses a two-dimensional PivotTable structure to analyze both geographi
 
 1.  **Download** the final Excel file.
 2.  **Open** the workbook in Microsoft Excel.
-3.  Navigate through the various sheets (e.g., `Revenue by Age Group`, `Product Revenue by Country`) to review the live tables and charts.
+3.  Navigate through the pivot sheets (e.g., `Profit Segmentation Pivot`) to review the summary reports. You can easily drag and drop fields within the PivotTables to create new views.
 
 ---
 
