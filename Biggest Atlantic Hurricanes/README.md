@@ -80,27 +80,12 @@ Used to quickly count the frequency of storms based on specific criteria. 📊
 
 ## 📈 Key Analysis Outputs 📊
 
-The final Excel file contains summarized PivotTables and visualizations derived from the formula columns.
-
-### 1. Severity Frequency Table 🌪️
-
-A PivotTable showing the distribution of storms across the Saffir-Simpson categories.
-
-| Severity Category | Storm Count | % of Total |
-| :---: | :---: | :---: |
-| Category 5 (Major) | 9 | 24% |
-| Category 4 (Major) | 12 | 32% |
-| Category 3 (Major) | 10 | 27% |
-| Category 1-2 | 6 | 17% |
-
-### 2. Decadal Storm Count Chart ⏳
-
-A bar chart illustrating which decades saw the highest count of major (Cat 3+) hurricanes, generated directly from a PivotChart. 
-
-[Image of a Bar Chart]
+In this context, SWITCH is likely used to automatically determine the Wind Speed Range or a Severity Label based on the Hurricane Category🌪️.
 
 
-* **Insight:** The chart helps visualize which periods experienced the most intense hurricane activity, highlighting trends in climate severity. 🚨
+<img width="1233" height="566" alt="image" src="https://github.com/user-attachments/assets/f1568192-5e83-407e-8a00-669a2074a076" />
+
+
 
 ---
 
